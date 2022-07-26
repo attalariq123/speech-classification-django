@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<h1>All Course</h1>
+
+<div>
+    <div>
+
+        {% for c in course %}
+        <div>
+            <h3>
+                {{c.id}} - {{c.name}}
+            </h3>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}

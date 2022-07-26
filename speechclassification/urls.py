@@ -27,6 +27,7 @@ urlpatterns = [
     path('audio/', include('audio.urls')),
     path('transcribe/', include('transcribe.urls')),
     path('admin/', admin.site.urls),   
+    path('tugasdua/', include('tugasdua_1301194294.urls')),
 ]
 
 if settings.DEBUG:
