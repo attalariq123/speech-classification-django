@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- Plugins css -->
+<link href="{% static 'libs/dropzone/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'libs/dropify/dropify.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            {% include "base_page_title.html" %}
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            
+                            <h4 class="header-title">Message List</h4>
+
+                            <a href={% url 'message:add' %}>
+                                <button type="button" class="ladda-button btn btn-primary" data-style="slide-right">
+                                    <i class="mdi mdi-plus"></i>
+                                    Add
+                                </button>
+                            </a>
+
+                            <p></p>
+                            <table id="state-saving-datatable" class="table activate-select dt-responsive nowrap">
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Message</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    {% for m in message %}
+                                    <tr>
+                                        <td>{{ m.username }}</td>
+                                        <td>{{ m.text }}</td>
+                                        <td>
+                                            <a href="{% url 'message:edit' m.id %}">
+                                                <button type="button" class="ladda-button btn btn-success"
+                                                    data-style="slide-right"><i class="mdi mdi-square-edit-outline"></i>
+                                                    Edit
+                                                </button>
+                                            </a>
+                                         
+                                            <button type="button" class="btn btn-danger waves-effect waves-light"
+                                            data-toggle="modal" data-target=".bs-example-modal-center{{m.id}}">
+                                            <i class="mdi mdi-delete"></i> Delete
+                                            </button>
+                                        
+                                            <div class="modal fade bs-example-modal-center{{m.id}}" tabindex="-1"
+                                            role="dialog" aria-labelledby="myCenterModalLabel" aria-hidden="true"
+                                            style="display: none;">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h4 class="modal-title" id="myCenterModalLabel">Are you sure
+                                                                to delete?</h4>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-hidden="true">×</button>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary waves-effect"
+                                                                data-dismiss="modal">Close</button>
+                                                            <a href="{% url 'message:delete' m.id %}">
+                                                                <button type="button"
+                                                                    class="btn btn-danger waves-effect waves-light"
+                                                                    data-style="slide-right"><i
+                                                                        class="mdi mdi-delete"></i> Delete</button>
+                                                            </a>
+                                                        </div>
+                                                    </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                            </div><!-- /.modal -->
+
+
+                                        </td>
+
+                                    </tr>
+                                    {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div><!-- end col-->
+            </div>
+            <!-- end row-->
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    {% include "base_footer.html" %}
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Page content -->
+<!-- ============================================================== -->
+
+{% endblock %}
+
+{% block js %}
+
+<script src="{% static 'libs/dropzone/dropzone.min.js' %}"></script>
+<script src="{% static 'libs/dropify/dropify.min.js' %}"></script>
+
+<!-- Init js-->
+<script src="{% static 'js/pages/form-fileuploads.init.js' %}"></script>
+
+{% endblock %}
