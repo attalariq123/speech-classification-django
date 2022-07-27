@@ -52,12 +52,20 @@
                                         <td>{{ m.username }}</td>
                                         <td>{{ m.text }}</td>
                                         <td>
+                                            <a href="{% url 'message:detail' m.id %}">
+                                                <button type="button" class="ladda-button btn btn-secondary"
+                                                    data-style="slide-right"><i class="mdi mdi-information-outline"></i>
+                                                    Detail
+                                                </button>
+                                            </a>
+                                            
                                             <a href="{% url 'message:edit' m.id %}">
                                                 <button type="button" class="ladda-button btn btn-success"
                                                     data-style="slide-right"><i class="mdi mdi-square-edit-outline"></i>
                                                     Edit
                                                 </button>
                                             </a>
+
                                          
                                             <button type="button" class="btn btn-danger waves-effect waves-light"
                                             data-toggle="modal" data-target=".bs-example-modal-center{{m.id}}">

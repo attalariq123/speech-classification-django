@@ -12,6 +12,12 @@ def index(request):
 def add(request):
     return render(request, 'message/add.html')
 
+def detail(request, id):
+    message = get_object_or_404(Message, id=id)
+    context = {'message': message}
+
+    return render(request, 'message/detail.html', context)
+
 def edit(request, id):
     message = get_object_or_404(Message, id=id)
     context = {'message': message}
