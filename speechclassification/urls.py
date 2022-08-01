@@ -28,7 +28,8 @@ urlpatterns = [
     path('transcribe/', include('transcribe.urls')),
     path('admin/', admin.site.urls),   
     path('tugasdua/', include('tugasdua_1301194294.urls')),
-    path('message/', include('message.urls')),
+    # path('message/', include('message.urls')),
+    path('emailnetwork/', include('email_network.urls')),
 ]
 
 if settings.DEBUG:

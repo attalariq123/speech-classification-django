@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- Plugins css -->
+<link href="{% static 'libs/dropzone/dropzone.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'libs/dropify/dropify.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+<div class="content-page">
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Workplace Email Network</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Workplace Email Network</h4>
+                    </div>
+                </div>
+            </div>     
+           
+           
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">Email Network</h4>
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table table-hover">
+                            <thead class="bg-secondary text-light">
+                                <tr>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Posting.division</th>
+                                    <th>Comment.division</th>
+                                    <th>Posting.department</th>
+                                    <th>Comment.department</th>                   
+                                    <th>Amount</th>                   
+                                </tr>
+                            </thead>
+                        
+                            <tbody>
+                                <tr>
+                                    <td>Abdul Muhardiansyah</td>
+                                    <td>Albert Christian Gultom</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>CPE</td>
+                                    <td>CPA</td>
+                                    <td>1</td>
+                                    
+    
+                                    {% comment %} <td><button type="button" class="ladda-button btn btn-success" data-style="slide-right"><i class="mdi mdi-send"></i></button></td> {% endcomment %}
+                                </tr>
+                                <tr>
+                                    <td>Abdul Muhardiansyah</td>
+                                    <td>Albert Christian Gultom</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>CPE</td>
+                                    <td>CPA</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Abdul Muhardiansyah</td>
+                                    <td>Albert Christian Gultom</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>CPE</td>
+                                    <td>CPA</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Abdul Muhardiansyah</td>
+                                    <td>Albert Christian Gultom</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>CPE</td>
+                                    <td>CPA</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Abdul Muhardiansyah</td>
+                                    <td>Albert Christian Gultom</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>Area Marketing Division</td>
+                                    <td>CPE</td>
+                                    <td>CPA</td>
+                                    <td>1</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div> <!-- end card body-->
+            </div> <!-- end card -->
+        
+
+          
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+
+    {% include "base_footer.html" %}
+
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/pages/datatables.init.js' %}"></script>
+{% endblock  %}
