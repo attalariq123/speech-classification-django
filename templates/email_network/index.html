@@ -107,55 +107,17 @@
                             </thead>
                         
                             <tbody>
+                                {% for email in email_network %}
                                 <tr>
-                                    <td>Abdul Muhardiansyah</td>
-                                    <td>Albert Christian Gultom</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>CPE</td>
-                                    <td>CPA</td>
-                                    <td>1</td>
-                                    
-    
-                                    {% comment %} <td><button type="button" class="ladda-button btn btn-success" data-style="slide-right"><i class="mdi mdi-send"></i></button></td> {% endcomment %}
+                                    <td>{{ email.sender }}</td>
+                                    <td>{{ email.receiver }}</td>
+                                    <td>{{ email.posting_division }}</td>
+                                    <td>{{ email.comment_division }}</td>
+                                    <td>{{ email.posting_department }}</td>
+                                    <td>{{ email.comment_department }}</td>
+                                    <td>{{ email.n }}</td>
                                 </tr>
-                                <tr>
-                                    <td>Abdul Muhardiansyah</td>
-                                    <td>Albert Christian Gultom</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>CPE</td>
-                                    <td>CPA</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>Abdul Muhardiansyah</td>
-                                    <td>Albert Christian Gultom</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>CPE</td>
-                                    <td>CPA</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>Abdul Muhardiansyah</td>
-                                    <td>Albert Christian Gultom</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>CPE</td>
-                                    <td>CPA</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>Abdul Muhardiansyah</td>
-                                    <td>Albert Christian Gultom</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>Area Marketing Division</td>
-                                    <td>CPE</td>
-                                    <td>CPA</td>
-                                    <td>1</td>
-                                </tr>
-                                
+                                {% endfor %} 
                             </tbody>
                         </table>
                     </div>
