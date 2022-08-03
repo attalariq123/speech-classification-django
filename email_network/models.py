@@ -31,3 +31,4 @@ class EmailNetwork(models.Model):
 
     def __str__(self):
         return self.sender.first_name + ' ' + self.sender.last_name + ' to ' + self.receiver.first_name + ' ' + self.receiver.last_name
+
