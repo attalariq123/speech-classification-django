@@ -58,10 +58,11 @@
                                     <p class="mb-1 font-weight-bold text-muted mt-3 mt-md-0">Division</p>
 
                                     <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose">
-                                        <option value="FD">Finance Division</option>
-                                        <option value="SMD">Strategic Marketing Division</option>
-                                        <option value="SDD">Sales & Distribution Division</option>
-                                        <option value="AD">Audit Division</option>
+
+                                        {% for div in division %}
+                                            <option value={{ div.id }}>{{ div }}</option>
+                                        {% endfor %}
+
                                     </select>
                                 </div> <!-- end col -->
 
@@ -109,8 +110,8 @@
                             <tbody>
                                 {% for email in email_network %}
                                 <tr>
-                                    <td>{{ email.sender }}</td>
-                                    <td>{{ email.receiver }}</td>
+                                    <td>{{ email.sender.first_name }} {{ email.sender.last_name }}</td>
+                                    <td>{{ email.receiver.first_name }} {{ email.receiver.last_name }}</td>
                                     <td>{{ email.posting_division }}</td>
                                     <td>{{ email.comment_division }}</td>
                                     <td>{{ email.posting_department }}</td>
