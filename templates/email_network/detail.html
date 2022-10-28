@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+<!-- Summernote css -->
+<link href="{% static 'libs/summernote/summernote-bs4.css' %}" rel="stylesheet" type="text/css" />
+
+<link href="{% static 'libs/select2/select2.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+<link href="{% static 'css/app.min.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+            
+{% block content %}
+
+<div class="content-page">
+    <div class="content">
+        <div class="container-fluid">
+            {% include "base_page_title.html" %}
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">From User</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.sender.first_name }}  {{ email_network.sender.last_name }}" disabled>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">To User</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.receiver.first_name }}  {{ email_network.receiver.last_name }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Posting.division</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.posting_division }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Posting.department</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.posting_department }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Comment.division</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.comment_division }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Comment.department</label>
+
+                                            <div class="col-7">
+                                                <input type="text" name="sender" parsley-type="email"
+                                            class="form-control parsley" id="inputEmail3"
+                                            placeholder="" data-parsley-id="40" value="{{ email_network.comment_department }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Amount</label>
+                                            <div class="col-7">
+                                                <input type="number" name="amount" class="form-control" value="{{ email_network.n }}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline wizard mt-3">
+                                            <li class="previous list-inline-item">
+                                                <a href="{% url 'email_network:index' %}">
+                                                    <button type="button" class="ladda-button btn btn-info"
+                                                    data-style="slide-right"><i
+                                                    class="mdi mdi-backspace-outline"></i> Back
+                                                </button>
+                                            </a>
+                                        </li>
+                                        
+                                        {% endblock %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+                            
+{% block js %}
+
+<script src="{% static 'libs/summernote/summernote-bs4.min.js' %}"></script>
+
+<script src="{% static 'js/pages/form-summernote.init.js' %}"></script>
+
+<script src="{% static 'libs/select2/select2.min.js' %}"></script>
+<script src="{% static 'js/pages/form-advanced.init.js' %}"></script>
+
+{% endblock %}

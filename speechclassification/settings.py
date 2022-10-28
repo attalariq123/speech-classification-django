@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'tugasdua_1301194294.apps.Tugasdua1301194294Config',
     'message.apps.MessageConfig',
+    'email_network.apps.EmailNetworkConfig',
 ]
 
 MIDDLEWARE = [
