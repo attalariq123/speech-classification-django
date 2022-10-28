@@ -23,6 +23,8 @@
 <link href="{% static 'libs/datatables/responsive.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
 <link href="{% static 'libs/datatables/select.bootstrap4.css' %}" rel="stylesheet" type="text/css" />
 <link href="{% static 'libs/footable/footable.core.min.css' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.11.0/css/anychart-ui.min.css?hcode=a0c21fc77e1449cc86299c5faa067dc4"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.anychart.com/releases/8.11.0/fonts/css/anychart-font.min.css"/>
 {% endblock %}
 
 {% block content %}
@@ -54,13 +56,13 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <p class="mb-1 font-weight-bold text-muted mt-3 mt-md-0">Division</p>
 
-                                    <select class="form-control select2-multiple" data-toggle="select2" multiple="multiple" data-placeholder="Choose">
+                                    <select class="form-control division" data-toggle="select2" multiple="multiple" data-placeholder="Choose">
 
                                         {% for div in division %}
-                                            <option value={{ div.id }}>{{ div }}</option>
+                                            <option>{{ div.name }}</option>
                                         {% endfor %}
 
                                     </select>
@@ -69,17 +71,20 @@
                                 <div class="col-md-3">
                                     <p class="mb-1 font-weight-bold text-muted">Type of Interaction</p>
 
-                                    <select class="form-control" data-toggle="select2">
-                                        <option>Select</option>
-                                        <option value="intra">Intradivision</option>
-                                        <option value="inter">Interdivision</option>
+                                    <select id="interaction" class="form-control interaction" data-toggle="select2" multiple="multiple" data-placeholder="Choose">
+                                        {% for int in interactions %}
+                                            <option>{{ int.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div> <!-- end col -->
                                 
                                 <div class="col-md-3">
                                     <div class="form-group mb-3">
                                         <label>Month From</label>
-                                        <input type="text" id="range-datepicker" class="form-control" placeholder="Start to End">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control datepicker" id="min" name="min" placeholder="Start date">
+                                            <input type="text" class="form-control datepicker" id="max" name="max" placeholder="End date">
+                                        </div>
                                     </div>
                                 </div>
 
@@ -108,7 +113,7 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="basic-datatable" class="table table-hover">
+                        <table id="basic-datatable" class="table table-hover" width="100%">
                             <thead class="bg-secondary text-light">
                                 <tr>
                                     <th>From</th>
@@ -118,6 +123,8 @@
                                     <th>Posting.department</th>
                                     <th>Comment.department</th>                   
                                     <th>n</th>                   
+                                    <th>Interaction</th>                   
+                                    <th>Created at</th>                   
                                     <th>Actions</th>                   
                                 </tr>
                             </thead>
@@ -132,6 +139,8 @@
                                     <td>{{ email.posting_department }}</td>
                                     <td>{{ email.comment_department }}</td>
                                     <td>{{ email.n }}</td>
+                                    <td>{{ email.interaction }}</td>
+                                    <td>{{ email.created|date:"Y-m-d" }}</td>
                                     <td>
                                         <a href="{% url 'email_network:detail' email.id%}">
                                             <button type="button" class="ladda-button btn-small btn-primary"
@@ -187,6 +196,8 @@
                 </div> <!-- end card body-->
             </div> <!-- end card -->
         
+            <div id="container-chart" style="height: 400px">
+            </div>
         </div> <!-- container -->
 
     </div> <!-- content -->
@@ -224,4 +235,75 @@
 <script src="{% static 'libs/datatables/buttons.print.min.js' %}"></script>
 <script src="{% static 'libs/datatables/dataTables.keyTable.min.js' %}"></script>
 <script src="{% static 'libs/datatables/dataTables.select.min.js' %}"></script>
-{% endblock  %}
+
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-graph.min.js"></script>
+<script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-ui.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var table = $('#basic-datatable').DataTable();
+        
+        table.column(7).visible(false);
+        table.column(8).visible(false);
+
+        $("select.division").on('keyup change', function () {
+            table.column(2).search($(this).val().join("|"), true, false).draw()
+            table.column(3).search($(this).val().join("|"), true, false).draw()
+        });
+
+        $("select.interaction").on('keyup change', function () {
+            table.column(7).search($(this).val().join("|"), true).draw()
+        });
+
+        $( "#min" ).datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        $( "#max" ).datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        let nodes = [];
+        let edges = [];
+
+        for (let i = 0; i < table.rows().count(); i++) {
+            nodes[i] = {"id": table.cell(i, 0).data() }
+            edges[i] = {"from": table.cell(i, 0).data(), "to": table.cell(i, 1).data()}
+            console.log(edges[i]);
+        }
+
+        var data = {
+            nodes: nodes,
+            edges: edges,
+          };
+          
+          // create a chart and set the data
+          var chart = anychart.graph(data);
+          var zoomController = anychart.ui.zoom();
+          zoomController.target(chart);
+          zoomController.render();
+
+          chart.title("Email Network Graph");
+          chart.title().padding(5).background().enabled(true).fill("#e9edf0").cornerType("round").corners(10).stroke("#D8D8D8");
+
+          chart.background().fill("#36404a");
+          
+          // configure nodes
+          chart.nodes().labels().enabled(true);
+          chart.nodes().labels().fontSize(12);
+
+          chart.nodes().normal().fill("#6658dd");
+          chart.nodes().normal().stroke("black");
+          chart.nodes().shape('circle');
+
+          chart.layout().type('force');
+          
+          chart.container("container-chart").draw();
+          
+    });
+
+
+</script>
+{% endblock %}

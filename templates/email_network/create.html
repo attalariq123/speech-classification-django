@@ -118,6 +118,20 @@
                                         </div>
 
                                         <div class="form-group row">
+                                            <label for="inputEmail3" class="col-4 col-form-label">Interaction Type</label>
+
+                                            <div class="col-7">
+                                                <select class="form-control" name="interaction" data-toggle="select2">
+                                                    <option>Select</option>
+                                                    {% for i in interactions %}
+                                                    <option value={{ i.id }}>{{ i.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label for="inputEmail3" class="col-4 col-form-label">Amount</label>
                                             <div class="col-7">
                                                 <input type="number" name="amount" onkeyup="if(this.value<0){this.value= this.value * -1}" required class="form-control parsley-success" placeholder="Amount" >

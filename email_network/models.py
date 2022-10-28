@@ -17,6 +17,11 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
+class Interaction(models.Model):
+    name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
 
 class EmailNetwork(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
@@ -26,6 +31,7 @@ class EmailNetwork(models.Model):
     comment_division = models.ForeignKey(Division, on_delete=models.CASCADE, related_name='comment_division')
     comment_department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='comment_department')
     n = models.IntegerField(null=False)
+    interaction = models.ForeignKey(Interaction, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

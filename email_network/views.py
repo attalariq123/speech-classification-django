@@ -1,21 +1,22 @@
-from ast import Div
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.models import User
 from django.urls import reverse
-from email_network.models import Department, Division, EmailNetwork
+from email_network.models import Department, Division, EmailNetwork, Interaction
 
 def index(request):
     email_network = EmailNetwork.objects.all()
     division = Division.objects.all()
-    context = {'email_network': email_network, 'division': division}
+    interaction = Interaction.objects.all()
+    context = {'email_network': email_network, 'division': division, 'interactions': interaction}
     return render(request, 'email_network/index.html', context)
 
 def create(request):
     users = User.objects.all()
     divisions = Division.objects.all()
     departments = Department.objects.all()
-    context = {'users': users, 'divisions': divisions, 'departments': departments}
+    interaction = Interaction.objects.all()
+    context = {'users': users, 'divisions': divisions, 'departments': departments, 'interactions': interaction}
     return render(request, 'email_network/create.html', context)
 
 def save(request):
@@ -26,7 +27,8 @@ def save(request):
         posting_department= Department.objects.get(id=request.POST['posting_department']), 
         comment_division= Division.objects.get(id=request.POST['comment_division']), 
         comment_department= Department.objects.get(id=request.POST['comment_department']), 
-        n=request.POST['amount']
+        n=request.POST['amount'],
+        interaction= Interaction.objects.get(id=request.POST['interaction']), 
         )
 
     email_network.save()
